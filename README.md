@@ -238,7 +238,7 @@ private BigInteger generaPrimo() {
     }
 }
 ```
-Test di Primalità
+Test del numero Primo
 ```java
 private boolean isPrimo(BigInteger num) {
     if (num.compareTo(BigInteger.ONE) <= 0) return false;
