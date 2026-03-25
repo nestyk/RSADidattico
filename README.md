@@ -205,37 +205,29 @@ C^d = (M^e)^d = M^(e×d) = M^(k×φ(n)+1) = M × (M^(φ(n)))^k ≡ M (mod n)
 ### 4.1 Architettura del Software
 
 Il progetto è composto da due classi principali:
-┌─────────────────────────────────────────────────────────┐
-│ RSAGUI.java │
-│ ┌─────────────────────────────────────────────────┐ │
+
+RSAGui.java
 │ │ Interfaccia Grafica │ │
 │ │ - Header con titolo e sviluppatori │ │
 │ │ - Pannello visualizzazione chiavi │ │
 │ │ - Pannello operazioni cifratura/decifratura │ │
-│ └─────────────────────────────────────────────────┘ │
-│ │ │
-│ ▼ │
-│ ┌─────────────────────────────────────────────────┐ │
-│ │ RSACore.java │ │
-│ │ ┌─────────────────────────────────────────┐ │ │
-│ │ │ Generazione Chiavi │ │ │
-│ │ │ - generaPrimo() │ │ │
-│ │ │ - isPrimo() │ │ │
-│ │ │ - trovaE() │ │ │
-│ │ │ - trovaK() │ │ │
-│ │ │ - cifra() │ │ │
-│ │ │ - decifra() │ │ │
+│ ───────────────────────────────────────────────── │
+│ │ RSACore.java 
+│ │ │ Generazione Chiavi 
+│ │ │ - generaPrimo() 
+│ │ │ - isPrimo()
+│ │ │ - trovaE() 
+│ │ │ - trovaK() 
+│ │ │ - cifra()
+│ │ │ - decifra() 
 
-│ │ └─────────────────────────────────────────┘ │ │
-│ └─────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────┘
 
 
 ### 4.2 Classe RSACore
 
 #### Generazione dei Numeri Primi
 
-
+```java
 private BigInteger generaPrimo() {
     while (true) {
         int num = 50 + random.nextInt(150);  // Range 50-200
@@ -245,8 +237,9 @@ private BigInteger generaPrimo() {
         }
     }
 }
+```
 Test di Primalità
-java
+```java
 private boolean isPrimo(BigInteger num) {
     if (num.compareTo(BigInteger.ONE) <= 0) return false;
     if (num.equals(BigInteger.valueOf(2))) return true;
@@ -261,8 +254,9 @@ private boolean isPrimo(BigInteger num) {
     }
     return true;
 }
+```
 Ricerca della Chiave Pubblica e
-
+```java
 private BigInteger trovaE(BigInteger m) {
     BigInteger e = BigInteger.valueOf(3);
     while (e.compareTo(m) < 0) {
@@ -273,8 +267,9 @@ private BigInteger trovaE(BigInteger m) {
     }
     throw new RuntimeException("Non trovo e");
 }
+```
 Ricerca della Chiave Privata d
-java
+```java
 private BigInteger trovaK(BigInteger e, BigInteger m) {
     BigInteger h = BigInteger.ONE;
     while (true) {
@@ -291,7 +286,7 @@ private BigInteger trovaK(BigInteger e, BigInteger m) {
 Esponenziazione Modulare (implementazione custom)
 Per dimostrare la comprensione dell'algoritmo, è stata implementata una versione custom dell'esponenziazione modulare:
 
-
+```java
 public static BigInteger modPow(BigInteger base, BigInteger exponent, BigInteger modulus) {
     BigInteger result = BigInteger.ONE;
     BigInteger b = base.mod(modulus);
@@ -310,6 +305,7 @@ public static BigInteger modPow(BigInteger base, BigInteger exponent, BigInteger
     
     return result;
 }
+```
 4.3 Classe RSAGUI
 L'interfaccia grafica è stata sviluppata con Java Swing, adottando design moderno e funzionalità intuitive.
 
